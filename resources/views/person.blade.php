@@ -29,11 +29,11 @@
   </form>
 
   @if(isset($results))
-    <div class="mt-8">
+    <div class="text-gray-700 mt-8">
         <h2 class="text-xl font-semibold">Hasil Perhitungan:</h2>
         <table class="min-w-full table-auto border-collapse border border-gray-300 mt-4">
             <thead>
-                <tr class="bg-gray-100">
+                <tr class="text-gray-700  bg-blue-200">
                     <th class="border border-gray-300 px-4 py-2">Kategori</th>
                     <th class="border border-gray-300 px-4 py-2">Persentase</th>
                     <th class="border border-gray-300 px-4 py-2">Jumlah</th>
