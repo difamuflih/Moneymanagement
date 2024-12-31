@@ -1,5 +1,5 @@
-<nav class="bg-white border-gray-200 dark:bg-gray-900">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+<nav class="bg-white shadow shadow-slate-300 dark:bg-gray-900">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
       <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
           <img src="{{ asset('images/logo kkn.svg') }}" alt="Logo" class="w-12 h-auto" />
           <span class="font-poppins self-center text-xl font-semibold whitespace-nowrap dark:text-white">KKN 14 CITAMBA</span>
