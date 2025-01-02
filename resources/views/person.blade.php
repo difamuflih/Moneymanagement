@@ -3,9 +3,9 @@
 @section('title', 'Home Page')
 
 @section('content')
-  <div class="container mx-auto mt-8">
-    <h1 class="text-3xl font-bold">Welcome to the Manage Person Page</h1>
-    <p class="mt-4">This is the main content of the home page.</p>
+  <div class="container mx-auto my-8">
+    <h1 class="text-3xl font-bold">Rencanakan Keuangan Anda, Wujudkan Impian Anda</h1>
+    <p class="mt-4">Melalui perencanaan yang cermat, pengelolaan yang efisien, dan pengendalian pengeluaran yang bijak, Anda dapat menciptakan kestabilan keuangan yang kokoh, memastikan kebutuhan terpenuhi, dan secara bertahap membawa impian masa depan Anda menjadi kenyataan yang dapat diraih.</p>
   </div>
     
 
@@ -28,22 +28,24 @@
     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Cek Sekarang</button>
   </form>
 
-  @if(isset($results))
+@if(isset($results))
     <div class="text-gray-700 mt-8">
         <h2 class="text-xl font-semibold">Hasil Perhitungan:</h2>
         <table class="min-w-full table-auto border-collapse border border-gray-300 mt-4">
             <thead>
-                <tr class="text-gray-700  bg-blue-200">
-                    <th class="border border-gray-300 px-4 py-2">Kategori</th>
-                    <th class="border border-gray-300 px-4 py-2">Persentase</th>
+                <tr class="text-gray-700 bg-blue-200">
+                  <th class="border border-gray-300 px-4 py-2">Sub-Kategori</th>
+                  <th class="border border-gray-300 px-4 py-2">Persentase</th>
+                  <th class="border border-gray-300 px-4 py-2">Kategori</th>
                     <th class="border border-gray-300 px-4 py-2">Jumlah</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($results as $result)
                     <tr>
-                        <td class="border border-gray-300 px-4 py-2">{{ $result['category'] }}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{ $result['percentage'] }}%</td>
+                      <td class="border border-gray-300 px-4 py-2">{{ $result['subcategory'] }}</td>
+                      <td class="border border-gray-300 px-4 py-2">{{ $result['percentage'] }}%</td>
+                      <td class="border border-gray-300 px-4 py-2">{{ $result['category'] }}</td>
                         <td class="border border-gray-300 px-4 py-2">{{ number_format($result['amount'], 2) }}</td>
                     </tr>
                 @endforeach
