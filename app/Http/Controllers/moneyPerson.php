@@ -9,8 +9,36 @@ class moneyPerson extends Controller
     //
     public function index()
     {
-        return view('person'); // View untuk form
+        // Ambil data dari session jika ada
+    $dailyExpense = session('dailyExpense');
+    $monthlyExpense = session('monthlyExpense');
+    $results = session('results');
+
+    return view('person', compact('dailyExpense', 'monthlyExpense', 'results'));
     }
+
+    // Memproses data dan menghitung pengeluaran per bulan
+    public function prepare(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'daily_expense' => 'required|numeric|min:0',
+        ]);
+
+        $dailyExpense = $request->input('daily_expense');
+
+        // Asumsi 30 hari dalam 1 bulan
+        $monthlyExpense = $dailyExpense * 30;
+
+        // Simpan hasil di session
+        session([
+            'dailyExpense' => $dailyExpense,
+            'monthlyExpense' => $monthlyExpense,
+        ]);
+
+        return redirect()->route('views.person.index'); // Redirect ke halaman form
+    }
+    
 
     // Memproses data dan menampilkan hasil
     public function hitung(Request $request)
@@ -53,8 +81,10 @@ class moneyPerson extends Controller
             ];
         }
     }
+    // Simpan hasil di session
+    session(['results' => $results]);
 
-    return view('person', compact('results'));
+    return redirect()->route('views.person.index'); // Redirect ke halaman form
 }
 
 }

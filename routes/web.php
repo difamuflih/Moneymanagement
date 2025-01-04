@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\moneyPerson;
+use App\Http\Controllers\moneyTeam;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/welcome', function () {
@@ -15,10 +16,11 @@ Route::get('/', function () {
 //     return view('person');
 // });
 
-Route::get('/person', [moneyPerson::class, 'index'])->name('views.person.index'); 
-Route::post('/person', [moneyPerson::class, 'hitung'])->name('views.person.hitung');
+Route::get('person', [moneyPerson::class, 'index'])->name('views.person.index'); 
+Route::post('person/hitung', [moneyPerson::class, 'hitung'])->name('views.person.hitung');
+Route::post('person/prepare', [moneyPerson::class, 'prepare'])->name('views.person.prepare');
+
+Route::get('team', [moneyTeam::class, 'index'])->name('views.team.index'); 
+Route::post('team', [moneyTeam::class, 'hitung'])->name('views.team.hitung');
 
 
-Route::get('/team', function () {
-    return view('team');
-});
