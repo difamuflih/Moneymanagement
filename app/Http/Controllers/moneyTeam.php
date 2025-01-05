@@ -9,7 +9,38 @@ class moneyTeam extends Controller
     //
     public function index()
     {
-        return view('team'); // View untuk form
+        // Ambil data dari session jika ada
+        $totalIncome = session('totalIncome', null);
+        $totalExpenses = session('totalExpenses', null);
+        $netProfit = session('netProfit', null);
+        $results = session('results', null);
+
+        return view('team', compact('totalIncome', 'totalExpenses', 'netProfit', 'results'));
+
+    }
+
+    public function prepare(Request $request)
+    {
+        $request->validate([
+            'total_income' => 'required|numeric|min:0',
+            'total_expenses' => 'required|numeric|min:0',
+        ]);
+
+        // Ambil data input
+        $totalIncome = $request->input('total_income');
+        $totalExpenses = $request->input('total_expenses');
+
+        // Hitung laba bersih
+        $netProfit = $totalIncome - $totalExpenses;
+
+        // Simpan hasil di session
+        session([
+            'totalIncome' => $totalIncome,
+            'totalExpenses' => $totalExpenses,
+            'netProfit' => $netProfit,
+        ]);
+
+        return redirect()->route('views.team.index');
     }
 
     // Memproses data dan menampilkan hasil
@@ -52,6 +83,10 @@ class moneyTeam extends Controller
             ];
         }
 
-        return view('team', compact('results'));
+        // Simpan hasil di session
+        session(['results' => $results]);
+
+        return redirect()->route('views.team.index'); // Redirect ke halaman form   
     }
+
 }

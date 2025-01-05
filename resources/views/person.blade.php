@@ -9,7 +9,6 @@
   </div>
   
 
-  
 
  {{-- Awal Perhitungan Manajemen Keuangan --}}
  <form method="POST" action="{{ route('views.person.hitung') }}"name="penghasilan" class="max-w-lg mx-auto my-5">
