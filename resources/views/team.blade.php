@@ -69,23 +69,23 @@
             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Hitung</button>
           </form>
     </div>
-</details>
-
-<!-- Hasil Perhitungan -->
-@if (session('netProfit'))
-  <div class="mt-5 p-4 max-w-lg mx-auto my-5">
+    
+    <!-- Hasil Perhitungan -->
+    @if (session('netProfit'))
+    <div class="mt-5 p-4 max-w-lg mx-auto my-5">
       <h2 class="text-md font-bold">Hasil Perhitungan:</h2>
       <p>Total Pendapatan: <strong>Rp{{ number_format(session('totalIncome'), 2) }}</strong></p>
       <p>Total Pengeluaran: <strong>Rp{{ number_format(session('totalExpenses'), 2) }}</strong></p>
       <p class="mt-2">Laba Bersih: 
-          <strong class="{{ session('netProfit') >= 0 ? 'text-green-600' : 'text-red-600' }}">
-              Rp{{ number_format(session('netProfit'), 2) }}
-          </strong>
+        <strong class="{{ session('netProfit') >= 0 ? 'text-green-600' : 'text-red-600' }}">
+          Rp{{ number_format(session('netProfit'), 2) }}
+        </strong>
       </p>
-  </div>
-@endif  
+    </div>
+    @endif  
+  </details>
 
-  @if(session('results'))
+  @if(session('team.results'))
   <div class="text-gray-700 mt-8">
       <h2 class="text-xl font-semibold">Hasil Perhitungan Subkategori:</h2>
       <table class="min-w-full table-auto border-collapse border border-gray-300 mt-4">
@@ -98,7 +98,7 @@
               </tr>
           </thead>
           <tbody>
-              @foreach(session('results') as $result)
+              @foreach(session('team.results') as $result)
                   <tr>
                     <td class="border border-gray-300 px-4 py-2">{{ $result['category'] }}</td>
                     <td class="border border-gray-300 px-4 py-2">{{ $result['percentage'] }}%</td>

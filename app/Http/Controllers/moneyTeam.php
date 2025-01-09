@@ -6,17 +6,15 @@ use Illuminate\Http\Request;
 
 class moneyTeam extends Controller
 {
-    //
     public function index()
     {
-        // Ambil data dari session jika ada
+        // Ambil data dari session tanpa menghapus data person
         $totalIncome = session('totalIncome', null);
         $totalExpenses = session('totalExpenses', null);
         $netProfit = session('netProfit', null);
-        $results = session('results', null);
+        $results = session('team.results', null);
 
         return view('team', compact('totalIncome', 'totalExpenses', 'netProfit', 'results'));
-
     }
 
     public function prepare(Request $request)
@@ -26,14 +24,10 @@ class moneyTeam extends Controller
             'total_expenses' => 'required|numeric|min:0',
         ]);
 
-        // Ambil data input
         $totalIncome = $request->input('total_income');
         $totalExpenses = $request->input('total_expenses');
-
-        // Hitung laba bersih
         $netProfit = $totalIncome - $totalExpenses;
 
-        // Simpan hasil di session
         session([
             'totalIncome' => $totalIncome,
             'totalExpenses' => $totalExpenses,
@@ -43,17 +37,14 @@ class moneyTeam extends Controller
         return redirect()->route('views.team.index');
     }
 
-    // Memproses data dan menampilkan hasil
     public function hitung(Request $request)
     {
-        // Validasi input
         $request->validate([
             'income' => 'required|numeric|min:1',
         ]);
 
         $income = $request->input('income');
 
-        // Subkategori dengan persentase dari total pendapatan
         $subcategories = [
             'Tabungan' => [
                 'persentase' => 0.3,
@@ -77,16 +68,14 @@ class moneyTeam extends Controller
         foreach ($subcategories as $category => $data) {
             $results[] = [
                 'category' => $category,
-                'percentage' => $data['persentase'] * 100, // Persentase dari total pendapatan
-                'amount' => $income * $data['persentase'], // Nominal yang dihitung
-                'information' => $data['keterangan'], // Keterangan tambahan
+                'percentage' => $data['persentase'] * 100,
+                'amount' => $income * $data['persentase'],
+                'information' => $data['keterangan'],
             ];
         }
 
-        // Simpan hasil di session
-        session(['results' => $results]);
+        session(['team.results' => $results]);
 
-        return redirect()->route('views.team.index'); // Redirect ke halaman form   
+        return redirect()->route('views.team.index');
     }
-
 }
